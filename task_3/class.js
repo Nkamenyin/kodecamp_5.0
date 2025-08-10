@@ -16,7 +16,7 @@ class ProvisionStore {
 
 addProduct(productName, cost, stockStatus) {
 	const validStatus = ["in-stock", "low-stock", "out-of-stock"];
-    if (!validStatuses.includes(stockStatus)) {
+    if (!validStatus.includes(stockStatus)) {
       throw new Error("Stock status must be in-stock, low-stock or out-of-stock");
     }
 
@@ -29,7 +29,7 @@ addProduct(productName, cost, stockStatus) {
     };
 	
 	this.products.unshift(newProduct);
-    return `${newProduct} product added successfully`;
+    return {success: true, message: "Product added successfully.", product: newProduct};
 }
 
 //A method that returns a list of products
@@ -40,7 +40,7 @@ listProducts() {
 //A method to return a product by its’ ID
 getAProduct(id) {
 	for (let i =0; i < this.products.length; i++) { 
-		if (this.products[i].id == id) {
+		if (this.products[i].id === id) {
 			return this.products[i];
 		}
 	}
@@ -60,17 +60,21 @@ editProduct(id, updates) {
 }
 
 //A method that can only edit current stock status
-editstockstatus(id, newStatus) {
-		const product = this.getAProduct(id);
-		if (!product) {
-			return {success: false, message: "Product not found."};
-		}
-		product.stockStatus = newStatus;
-		return { success: true, message: "Stock updated successfully."};
+editStockStatus(id, newStatus) {
+	const validStatus = ["in-stock", "low-stock", "out-of-stock"];
+	if (!validStatus.includes(newStatus)) {
+		return {success: false, message: "Invalid stock status."};
 	}
+	const product = this.getAProduct(id);
+	if (!product) {
+		return {success: false, message: "Product not found."};
+	}
+	product.stockStatus = newStatus;
+	return { success: true, message: "Stock updated successfully."};
+}
 
-	//A method to delete a product by ID.
-	deleteProduct(id) {
+//A method to delete a product by ID.
+deleteProduct(id) {
 		for (let i = 0; i < this.products.length; i++) {
 			if (this.products[i].id === id) {
 				this.products.splice(i, 1);
