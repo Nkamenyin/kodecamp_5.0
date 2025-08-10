@@ -1,1 +1,1 @@
-A space for my kodecamp5.0NodejsBeginner  practice codes, projects and tasks.
+A space for my kodecamp5.0NodejsBeginner practical codes, projects and tasks.
