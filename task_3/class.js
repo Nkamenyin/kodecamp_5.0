@@ -18,7 +18,7 @@ addProduct(productName, cost, stockStatus) {
 	const validStatus = ["in-stock", "low-stock", "out-of-stock"];
     if (!validStatus.includes(stockStatus)) {
       throw new Error("Stock status must be in-stock, low-stock or out-of-stock");
-    }
+	}
 
     const newProduct = {
       id: this.#generateId(),
@@ -83,4 +83,13 @@ deleteProduct(id) {
 		}
 		return {success: false, message: "Product not found."};
 	}
+// optional
+getStoreDetails() {
+	return {
+		shopName: this.#shopName,
+		location: this.#location
+	};
 }
+}
+//const store = new ProvisionStore("big", "uyo");
+//console.log(store.getStoreDetails());
