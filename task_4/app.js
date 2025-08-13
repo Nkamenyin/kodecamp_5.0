@@ -1,4 +1,7 @@
 const express = require('express');
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+const jwb = require('jsonwebtoken')
 
 const app = express();
 
@@ -9,5 +12,5 @@ app.get("/ping", (req, res, next) => {
 });
 
 app.listen(3000, () => {
-    console.log("Sever has started");
+    console.log("Sever is running on http://localhost:3000");
 });
