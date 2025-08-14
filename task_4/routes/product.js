@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
-const { authenticate, authorize } = require('../middleware/authMiddleware');
+const {authenticate, authorize} = require('../middleWares/authentication');
 
 // GET /products — accessible to everyone
 router.get('/', async (req, res) => {
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const products = await Product.find().populate('ownerId', 'fullName email');
     res.status(200).json(products);
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({message: 'Server error', error: err.message });
   }
 });
 

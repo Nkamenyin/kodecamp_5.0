@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 
-const authUrl = require('./routes/authRoutes');
-const productUrl = require('./routes/productRoutes');
+const authUrl = require('./routes/auth');
+const productUrl = require('./routes/product');
 
 const app = express();
 app.use(express.json());
@@ -22,5 +22,5 @@ app.use('/auth', authUrl);
 app.use('/product', productUrl);
 
 app.listen(3000, () => {
-    console.log("Sever is running on http://localhost:3000");
+    console.log("Server is running on http://localhost:3000");
 });
