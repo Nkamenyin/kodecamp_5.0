@@ -1,0 +1,32 @@
+{
+  "name": "task_4",
+  "version": "1.0.0",
+  "description": "My e-commerce app",
+  "keywords": [
+    "task",
+    "backend",
+    "express"
+  ],
+  "homepage": "https://github.com/Nkamenyin/kodecamp_5.0#readme",
+  "bugs": {
+    "url": "https://github.com/Nkamenyin/kodecamp_5.0/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nkamenyin/kodecamp_5.0.git"
+  },
+  "license": "ISC",
+  "author": "Valentine Eyet",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0"
+  }
+}
