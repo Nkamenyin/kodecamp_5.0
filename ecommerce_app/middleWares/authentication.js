@@ -1,29 +1,29 @@
 const jwt = require('jsonwebtoken');
 
-// Middleware to check if token is present and valid
-const authenticate = (req, res, next) => {
-  const authHeader = req.headers.authorization;
 
-
-  // Check if header exists and starts with "Bearer"
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({message: 'Authentication token missing or invalid'});
-  }
-
-  const token = authHeader.split(' ')[1]; // Extract token
-
+function authenticate(req, res, next) {
   try {
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!req.headers.authorization) {   //check if token is present and valid
+      return res.status(400).send({message: "Not a valid token"});
+    }
 
-    // Attach user info (userId, email, role) to request
-    req.user = decoded;
+    const [scheme, token] = req.headers.authorization.split(' '); // Extract token
 
-    next(); // Allow request to proceed
-  } catch (err) {
+// Check if header exists and starts with "Bearer"
+    if (scheme.toLowerCase() === 'bearer') {
+      const value = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = value;   // Attach user info (userId, email, role) to request
+    } else {
+      res.status(422).send({
+        message: "Invalid authorization scheme"
+      });
+    } next(); // Allow request to proceed
+  } catch (error) {
     res.status(401).json({message: 'Invalid or expired token'});
   }
-};
+}
+
+
 
 
 // Middleware to check if user has required role

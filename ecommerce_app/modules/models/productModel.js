@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
   },
 
   productImages: {
-    type: [String], // Array of image URLs
+    type: [String],
     default: [],
   },
 
