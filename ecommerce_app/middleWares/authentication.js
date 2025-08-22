@@ -17,7 +17,7 @@ function authenticate(req, res, next) {
       res.status(422).send({
         message: "Invalid authorization scheme"
       });
-    } next(); // Allow request to proceed
+    } // Allow request to proceed
   } catch (error) {
     res.status(401).json({message: 'Invalid or expired token'});
   }
@@ -36,4 +36,11 @@ const authorize = (role) => {
   };
 };
 
-module.exports = {authenticate, authorize};
+
+
+//Checking for admin
+const isAdmin = authorize("admin");
+
+
+
+module.exports = {authenticate, authorize, isAdmin};
