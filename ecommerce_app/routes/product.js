@@ -4,8 +4,9 @@ const Product = require('../modules/models/productModel');
 const productController = require('../modules/controllers/productController');
 const {authenticate, authorize} = require('../middleWares/authentication');
 
-// GET /products — accessible to everyone
-router.get('/', productController.getProduct);
+
+// GET /products — Updated
+router.get('/:brand/:page/:limit', productController.getProduct);
 
 // POST /products — admin only
 router.post('/', authenticate, authorize('admin'), productController.addProduct);

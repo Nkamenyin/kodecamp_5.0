@@ -9,15 +9,16 @@ function authenticate(req, res, next) {
 
     const [scheme, token] = req.headers.authorization.split(' '); // Extract token
 
-// Check if header exists and starts with "Bearer"
     if (scheme.toLowerCase() === 'bearer') {
       const value = jwt.verify(token, process.env.JWT_SECRET);
       req.user = value;   // Attach user info (userId, email, role) to request
+      return next();
     } else {
       res.status(422).send({
         message: "Invalid authorization scheme"
       });
-    } // Allow request to proceed
+    } 
+
   } catch (error) {
     res.status(401).json({message: 'Invalid or expired token'});
   }
@@ -36,11 +37,13 @@ const authorize = (role) => {
   };
 };
 
-
-
 //Checking for admin
-const isAdmin = authorize("admin");
+//const isAdmin = authorize("admin");
 
 
 
-module.exports = {authenticate, authorize, isAdmin};
+module.exports = {
+  authenticate,
+  authorize,
+  //isAdmin
+}
