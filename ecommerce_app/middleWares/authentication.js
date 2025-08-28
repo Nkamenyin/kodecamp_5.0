@@ -37,13 +37,13 @@ const authorize = (role) => {
   };
 };
 
-//Checking for admin
-//const isAdmin = authorize("admin");
+//Checking for customer
+const isCustomer = authorize("customer");
 
 
 
 module.exports = {
   authenticate,
   authorize,
-  //isAdmin
+  isCustomer
 }

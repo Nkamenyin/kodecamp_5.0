@@ -6,6 +6,7 @@ require('dotenv').config();
 const authUrl = require('./routes/auth');
 const productUrl = require('./routes/product');
 const brandUrl = require('./routes/brand');
+const orderUrl = require('./routes/order');
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ mongoose.connect(process.env.DB_CONNECT)
 app.use('/auth', authUrl);
 app.use('/product', productUrl);
 app.use('/brand', brandUrl);
+app.use('order', orderUrl);
 
 app.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
