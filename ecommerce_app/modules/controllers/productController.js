@@ -11,7 +11,7 @@ const addProduct =  async (req, res) => {
       cost,
       productImages,
       description,
-      brand:mongoose.Types.ObjectId(brand),
+      brand:new mongoose.Types.ObjectId(brand),
       stockStatus
     });
 
