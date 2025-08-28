@@ -1,13 +1,10 @@
 const Product = require('../models/productModel');
-
+const mongoose = require('mongoose');
 
 const addProduct =  async (req, res) => {
   try {
     const {productName, cost, productImages, description, brand, stockStatus,} = req.body;
-     //if (!brand) {
-      //return res.status(400).json({ message: 'Brand is required in request body' });
-    //}
-
+    
     const product = new Product({
       productName,
       ownerId: req.user.userId,
