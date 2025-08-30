@@ -21,7 +21,7 @@ mongoose.connect(process.env.DB_CONNECT)
 app.use('/auth', authUrl);
 app.use('/product', productUrl);
 app.use('/brand', brandUrl);
-app.use('order', orderUrl);
+app.use('/order', orderUrl);
 
 app.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");

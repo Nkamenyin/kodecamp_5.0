@@ -12,18 +12,13 @@ const createOrder = async (req, res) => {
 
     const orders = req.body;
 
-    /*if (!Array.isArray(orders) || orders.length === 0) {
-      return res.status(400).json({ message: 'Order must be a non-empty array.' });
-    }*/
-
-    // Attach customerId from token
     const customerId = req.user.userId;
 
     const formattedOrders = orders.map(order => ({
       ...order,
       customerId,
-      productId: new mongoose.Types.ObjectId(order.productId),
-      ownerId: new mongoose.Types.ObjectId(order.ownerId)
+      productId: new mongoose.Types.ObjectId(String(order.productId)),
+      ownerId: new mongoose.Types.ObjectId(String(order.ownerId))
     }));
 
     const savedOrders = await Order.insertMany(formattedOrders);
@@ -38,13 +33,14 @@ const createOrder = async (req, res) => {
   }
 };
 
+
 // GET /order — Admin only
 const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find().populate('productId ownerId customerId', 'productName fullName email');
     res.json(orders);
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({message: 'Server error', error: err.message});
   }
 };
 
@@ -54,11 +50,11 @@ const getOrderById = async (req, res) => {
     const order = await Order.findById(req.params.id)
       .populate('productId ownerId customerId', 'productName fullName email');
 
-    if (!order) return res.status(404).json({ message: 'Order not found' });
+    if (!order) return res.status(404).json({message: 'Order not found'});
 
     res.json(order);
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({message: 'Server error', error: err.message});
   }
 };
 
@@ -73,15 +69,15 @@ const updateOrderStatus = async (req, res) => {
 
     const order = await Order.findByIdAndUpdate(
       req.params.id,
-      { shippingStatus },
-      { new: true }
+      {shippingStatus},
+      {new: true}
     );
 
-    if (!order) return res.status(404).json({ message: 'Order not found' });
+    if (!order) return res.status(404).json({message: 'Order not found'});
 
-    res.json({ message: 'Order status updated', order });
+    res.json({message: 'Order status updated', order});
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({message: 'Server error', error: err.message});
   }
 };
 

@@ -20,11 +20,11 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
 
-  /*customerId: {
+  customerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  },*/
+  },
 
   quantity: {
     type: Number,
@@ -32,19 +32,19 @@ const orderSchema = new mongoose.Schema({
   },
 
 totalCost: {
-    type: Numberg,
+    type: Number,
     required: true,
   },
 
   shippingStatus: {
     type: String,
     enum: ["pending", "shipped", "delivered"],
-    default: pending,
+    default: "pending",
   },
 
 }, {timestamps: true});
 
 
-//const orderModel = mongoose.model('Order', userSchema);
+const orderModel = mongoose.model('Order', orderSchema);
 
 module.exports = orderModel;
