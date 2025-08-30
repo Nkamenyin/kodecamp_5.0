@@ -1,4 +1,4 @@
-const Order = require('../models/authModel');
+const Order = require('../models/orderModel');
 const mongoose = require('mongoose');
 
 
@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const createOrder = async (req, res) => {
   try {
     if (req.user.role !== 'customer') {
-      return res.status(403).json({ message: 'Only customers can place orders.' });
+      return res.status(403).json({message: 'Only customers can place orders.'});
     }
 
     const orders = req.body;
@@ -29,7 +29,7 @@ const createOrder = async (req, res) => {
     });
   } catch (err) {
     console.error('Create Order Error:', err);
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({message: 'Server error', error: err.message});
   }
 };
 
@@ -61,10 +61,10 @@ const getOrderById = async (req, res) => {
 // PATCH /order/:id — Admin only
 const updateOrderStatus = async (req, res) => {
   try {
-    const { shippingStatus } = req.body;
+    const {shippingStatus} = req.body;
 
     if (!['pending', 'shipped', 'delivered'].includes(shippingStatus)) {
-      return res.status(400).json({ message: 'Invalid shipping status' });
+      return res.status(400).json({message: 'Invalid shipping status'});
     }
 
     const order = await Order.findByIdAndUpdate(

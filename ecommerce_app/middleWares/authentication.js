@@ -38,12 +38,12 @@ const authorize = (role) => {
 };
 
 //Checking for customer
-const isCustomer = authorize("customer");
+//const isCustomer = authorize("customer");
 
 
 
 module.exports = {
   authenticate,
   authorize,
-  isCustomer
+  //isCustomer
 }
